@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-import scenicBackground from "@/assets/ivoryandgolden_background.mp4";
+import scenicBackground from "@/assets/ivoryandgolden_background_small.mp4";
 
 export function GlobalVideoBackground() {
   const [mounted, setMounted] = useState(false);
