@@ -65,7 +65,7 @@ export function VenueSection() {
             </p>
 
             {/* Button - solid burgundy, ivory text, gold border */}
-            <a
+            {/* <a
               href={mapsDirectionsUrl(wedding.venue.mapsQuery)}
               target="_blank"
               rel="noreferrer"
@@ -90,7 +90,7 @@ export function VenueSection() {
               "
             >
               Get Directions
-            </a>
+            </a> */}
           </div>
         </Reveal>
       </div>

@@ -119,14 +119,14 @@ function Index() {
 
           <VenueSection />
 
-          <DressCode />
+          {/* <DressCode /> */}
 
           {/* <GuestInfo /> */}
 
           <Footer />
         </div>
 
-        {introDone && <MusicControl />}
+        {introDone && <MusicControl start={introDone} />}
       </main>
     </>
   );

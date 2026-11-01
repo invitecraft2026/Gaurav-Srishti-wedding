@@ -3,10 +3,23 @@ import { useEffect, useRef, useState } from "react";
 import { wedding } from "@/config/wedding";
 
 /** Renders only when a music file is configured in src/config/wedding.ts */
-export function MusicControl() {
+export function MusicControl({ start = false }: { start?: boolean }) {
   const src = wedding.musicSrc;
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+
+  // Start automatically once the invitation opens
+  useEffect(() => {
+    if (!start) return;
+    const a = audioRef.current;
+    if (!a) return;
+    a.play()
+      .then(() => setPlaying(true))
+      .catch((err) => {
+        console.error("Autoplay blocked:", err);
+        setPlaying(false);
+      });
+  }, [start]);
 
   useEffect(() => {
     const a = audioRef.current;
@@ -22,16 +35,18 @@ export function MusicControl() {
       a.pause();
       setPlaying(false);
     } else {
-      void a
-        .play()
+      a.play()
         .then(() => setPlaying(true))
-        .catch(() => setPlaying(false));
+        .catch((err) => {
+          console.error("Music failed:", err, a.error);
+          setPlaying(false);
+        });
     }
   };
 
   return (
     <>
-      <audio ref={audioRef} src={src} loop preload="none" />
+      <audio ref={audioRef} src={src} loop preload="auto" />
       <button
         type="button"
         onClick={toggle}
